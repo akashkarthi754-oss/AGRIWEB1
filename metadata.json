@@ -1,0 +1,6 @@
+{
+  "name": "AgriMarket - Farm-to-Buyer Agricultural Platform",
+  "description": "Modern agricultural supply chain marketplace connecting farmers, procurement, transport agencies, and buyers with transparent pricing and end-to-end logistics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

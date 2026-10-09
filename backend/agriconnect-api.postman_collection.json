@@ -1,0 +1,148 @@
+{
+  "info": {
+    "name": "AgriConnect REST API Collection",
+    "_postman_id": "c1f7b822-7728-444a-a38f-a94f0fa23f77",
+    "description": "Comprehensive Postman/Thunder Client Collection for AgriConnect Agricultural Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login Farmer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"9876543210\",\n  \"password\": \"Demo@1234\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"] }
+          }
+        },
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kisan Mitra FPO\",\n  \"phone\": \"9899887766\",\n  \"password\": \"Demo@1234\",\n  \"role\": \"farmer\",\n  \"location\": {\"state\": \"Maharashtra\", \"district\": \"Nagpur\"}\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/auth/signup", "host": ["{{baseUrl}}"], "path": ["api", "auth", "signup"] }
+          }
+        },
+        {
+          "name": "Get Profile Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/me", "host": ["{{baseUrl}}"], "path": ["api", "auth", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Produce Lots",
+      "item": [
+        {
+          "name": "Create Lot",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"crop\": \"Sharbati Wheat\",\n  \"quantity\": 3000,\n  \"expectedPrice\": 32,\n  \"unit\": \"kg\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/lots", "host": ["{{baseUrl}}"], "path": ["api", "lots"] }
+          }
+        },
+        {
+          "name": "Get My Lots",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/lots/mine", "host": ["{{baseUrl}}"], "path": ["api", "lots", "mine"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Market & Matching",
+      "item": [
+        {
+          "name": "Get Market Prices",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/market/prices?crop=Wheat", "host": ["{{baseUrl}}"], "path": ["api", "market", "prices"] }
+          }
+        },
+        {
+          "name": "Get Price Trend",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/market/trend?crop=Wheat&days=30", "host": ["{{baseUrl}}"], "path": ["api", "market", "trend"] }
+          }
+        },
+        {
+          "name": "Get Lot Matches",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/lots/{{lotId}}/matches", "host": ["{{baseUrl}}"], "path": ["api", "lots", "{{lotId}}", "matches"] }
+          }
+        },
+        {
+          "name": "Get Net Realisation",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/lots/{{lotId}}/realisation", "host": ["{{baseUrl}}"], "path": ["api", "lots", "{{lotId}}", "realisation"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Logistics & Tracking",
+      "item": [
+        {
+          "name": "Vehicle Recommendation",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/lots/{{lotId}}/vehicle-recommendation", "host": ["{{baseUrl}}"], "path": ["api", "lots", "{{lotId}}", "vehicle-recommendation"] }
+          }
+        },
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"crop\": \"Wheat\",\n  \"quantity\": 2000,\n  \"pickupLocation\": \"Nagpur APMC\",\n  \"deliveryLocation\": \"Pune FreshHub\",\n  \"vehicleType\": \"Tata 407 (2.5 Ton)\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/bookings", "host": ["{{baseUrl}}"], "path": ["api", "bookings"] }
+          }
+        },
+        {
+          "name": "Get Booking Tracking",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/bookings/{{bookingId}}/tracking", "host": ["{{baseUrl}}"], "path": ["api", "bookings", "{{bookingId}}", "tracking"] }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "token", "value": "" },
+    { "key": "lotId", "value": "" },
+    { "key": "bookingId", "value": "" }
+  ]
+}
